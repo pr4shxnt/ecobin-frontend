@@ -1,0 +1,23 @@
+.menu-bar>ul>.nav-link::after {
+    content: "";
+    width: 0%;
+    height: 2px;
+    border-radius: 2px;
+    background: #3a563f;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+  }
+
+  .menu-bar>ul>.nav-link:hover::after {
+    width: 100%;
+  }
+
+  .menu-bar>ul>.active::after {
+    width: 100%;
+  }
+
+  .navbar.fixed .container {
+    max-width: 1200px; /* Adjust based on your desired layout */
+    margin: 0 auto;    /* Centers the container */
+  }
