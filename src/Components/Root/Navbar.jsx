@@ -4,7 +4,6 @@ import "./Navbar.css";
 import SubNavbar from "./SubNavbar";
 import NavbarResponsive from "./NavbarResponsive";
 import logoonly from "../../assets/logoonly.png";
-import Socialdropdown from "./Socialdropdown";
 import { NavLink, useLocation, useParams } from "react-router-dom";
 
 const Navbar = () => {
