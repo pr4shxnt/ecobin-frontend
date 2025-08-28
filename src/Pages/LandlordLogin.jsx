@@ -17,7 +17,7 @@ const LandlordLogin = () => {
     if (isTenantAuthenticated) {
       navigate("/tenant");
     } else if (isLandlordAuthenticated) {
-      navigate("/landlord");
+      navigate("/landlord/dashboard");
     } else {
       return;
     }

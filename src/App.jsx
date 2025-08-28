@@ -16,6 +16,9 @@ import Root from "./Components/Tenants/Root/Root";
 import QRcode from "./Components/Tenants/Dashboard/QRcode";
 import Invoice from "./Components/Tenants/Dashboard/Invoice";
 import Profile from "./Pages/Profile";
+import UserLocation from "./Pages/UserLocation";
+import AdminLogin from "./Pages/AdminLogin";
+import AdminDashboard from "./Pages/AdminDashboard";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Homepage />,
+      },
+      {
+        path: "test",
+        element: <UserLocation />,
       },
     ],
   },
@@ -72,7 +79,29 @@ const router = createBrowserRouter([
   },
   {
     path: "/landlord",
-    element: <LandlordDashboard />,
+    children: [
+      {
+        path: "login",
+        element: <LandlordLogin />,
+      },
+      {
+        path: "dashboard",
+        element: <LandlordDashboard />,
+      },
+    ],
+  },
+  {
+    path: "/admin",
+    children: [
+      {
+        path: "login",
+        element: <AdminLogin />,
+      },
+      {
+        path: "dashboard",
+        element: <AdminDashboard />,
+      },
+    ],
   },
 ]);
 
