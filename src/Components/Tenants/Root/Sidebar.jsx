@@ -7,6 +7,7 @@ import {
   LogOut as FaSignOutAlt,
   QrCode,
   BookCheck,
+  AtomIcon,
 } from "lucide-react";
 import logoonly from "../../../assets/logoonly.png";
 
@@ -40,6 +41,11 @@ const menuItems = [
     label: "Your QR",
     icon: <QrCode className="w-5 h-5 mr-3" />,
     path: "/tenant/qr",
+  },
+  {
+    label: "Classify",
+    icon: <AtomIcon />,
+    path: "/tenant/ai",
   },
 ];
 

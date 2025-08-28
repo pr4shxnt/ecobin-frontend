@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTenant } from "../../../Features/Slices/User/Tenants/TenantAuthSlice";
 import { getInvoice } from "../../../Features/Slices/User/InvoiceSlice";
+import EsewaButton from "../../Esewa";
 
 // This is the main component for our waste management invoice application.
 export default function Invoice() {
@@ -77,6 +78,8 @@ export default function Invoice() {
           );
     setTotal(computedTotal);
   }, [invoice]);
+
+  console.log("invoice details:", invoiceDetails);
 
   return (
     <div className="min-h-screen w-full bg-gray-50 flex items-center justify-center p-2 sm:p-6 lg:p-4">
@@ -189,11 +192,15 @@ export default function Invoice() {
 
             {/* Total Section */}
             <div className="flex justify-end pr-6">
-              <div className="w-full sm:w-1/2 md:w-1/3">
-                <div className="flex justify-between font-bold text-gray-800 text-lg">
+              <div className="w-full items-end justify-center flex flex-col sm:w-1/2 md:w-1/3">
+                <div className="flex gap-10 mb-3 justify-between font-bold text-gray-800 text-lg">
                   <span>Total Due:</span>
                   <span>Npr. {total.toFixed(2)}</span>
                 </div>
+                <EsewaButton
+                  price={Math.floor(total)}
+                  productId={invoiceDetails.invoiceNumber}
+                />
               </div>
             </div>
           </div>

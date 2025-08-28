@@ -8,7 +8,7 @@ import LandlordRegister from "./Pages/LandlordRegister";
 import LandlordLogin from "./Pages/LandlordLogin";
 import TenantRegister from "./Pages/TenantRegister";
 import TenantLogin from "./Pages/TenantLogin";
-import TenantDashboard from "./Pages/TenantDashboard";
+import ImageScanner from "./Components/Tenants/Dashboard/ImageScanner";
 import LandlordDashboard from "./Pages/LandlordDashboard";
 import { Provider } from "react-redux";
 import store from "./Features/Store";
@@ -58,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "invoice",
         element: <Invoice />,
+      },
+      {
+        path: "ai",
+        element: <ImageScanner />,
       },
     ],
   },
