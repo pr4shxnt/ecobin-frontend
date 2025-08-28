@@ -1,11 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Home, User, ArrowRight } from "lucide-react";
 import AuthNav from "../Components/AuthNav";
+import { useSelector } from "react-redux";
 
 const UserSelection = () => {
+  const { isTenantAuthenticated } = useSelector((state) => state.tenantAuth);
+  const { isLandlordAuthenticated } = useSelector(
+    (state) => state.landlordAuth
+  );
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isTenantAuthenticated) {
+      navigate("/tenant");
+    } else if (isLandlordAuthenticated) {
+      navigate("/landlord");
+    } else {
+      return;
+    }
+  }, [isLandlordAuthenticated, isTenantAuthenticated]);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
+    <div className="h-full bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
       <AuthNav />
       <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl w-full space-y-8">
@@ -115,7 +133,6 @@ const UserSelection = () => {
 
           <div className="text-center mt-8">
             <p className="text-sm text-gray-500">
-              Already have an account?{" "}
               <Link
                 to="/"
                 className="font-medium text-gray-700 hover:text-gray-900"

@@ -115,7 +115,7 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <NavLink to={`/tenant-login`}>
+        <NavLink to={`/user-selection`}>
           {/* BUTTON */}
           <div className="hidden md:flex items-center bg-[#3a563f] text-white px-4 py-3 rounded-full font-semibold">
             Get Started <ChevronRight size={20} />
