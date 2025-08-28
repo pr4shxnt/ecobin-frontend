@@ -32,9 +32,9 @@ function EsewaButton({ price, productId }) {
     <div>
       {error && <p>{error}</p>}
       <button
-        className="bg-green-900 text-white px-6 py-2 rounded-full"
+        className="bg-green-900 text-white px-6 disabled:cursor-not-allowed py-2 rounded-full"
         onClick={handlePayment}
-        disabled={loading}
+        disabled={loading || price <= 10}
       >
         {loading ? "Processing..." : "Pay with eSewa"}
       </button>

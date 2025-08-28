@@ -15,6 +15,7 @@ import store from "./Features/Store";
 import Root from "./Components/Tenants/Root/Root";
 import QRcode from "./Components/Tenants/Dashboard/QRcode";
 import Invoice from "./Components/Tenants/Dashboard/Invoice";
+import Profile from "./Pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "ai",
         element: <ImageScanner />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },
