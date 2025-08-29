@@ -20,7 +20,7 @@ export const registerTenant = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data || "registration failed. It's us not you"
+        error.response?.data.message || "registration failed. It's us not you"
       );
     }
   }
