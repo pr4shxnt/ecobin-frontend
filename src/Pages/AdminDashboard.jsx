@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import AdminSidebar from '../Components/Admin/AdminSidebar';
-import AdminHeader from '../Components/Admin/AdminHeader';
-import DashboardOverview from '../Components/Admin/DashboardOverview';
-import ScheduleManagement from '../Components/Admin/ScheduleManagement';
-import NotificationCenter from '../Components/Admin/NotificationCenter';
-import LiveTracking from '../Components/Admin/LiveTracking';
-import RouteManagement from '../Components/Admin/RouteManagement';
-import MapComponent from '../Components/Admin/MapComponent';
-import { MapPinIcon } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import AdminSidebar from "../Components/Admin/AdminSidebar";
+import AdminHeader from "../Components/Admin/AdminHeader";
+import DashboardOverview from "../Components/Admin/DashboardOverview";
+import ScheduleManagement from "../Components/Admin/ScheduleManagement";
+import NotificationCenter from "../Components/Admin/NotificationCenter";
+import LiveTracking from "../Components/Admin/LiveTracking";
+import RouteManagement from "../Components/Admin/RouteManagement";
+import MapComponent from "../Components/Admin/MapComponent";
+import { MapPinIcon } from "lucide-react";
 
 const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState("overview");
   const [adminData, setAdminData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedCoordinates, setSelectedCoordinates] = useState(null);
@@ -20,9 +20,9 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     // Check if admin is logged in
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem("adminToken");
     if (!token) {
-      navigate('/admin/login');
+      navigate("/admin/login");
       return;
     }
 
@@ -32,25 +32,25 @@ const AdminDashboard = () => {
 
   const fetchAdminProfile = async () => {
     try {
-      const token = localStorage.getItem('adminToken');
-      const response = await fetch(`${import.meta.env.VITE_BACKEND}/admin/auth/profile`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+      const token = localStorage.getItem("adminToken");
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND}/admin/auth/profile`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
-      });
+      );
 
       if (response.ok) {
         const data = await response.json();
         setAdminData(data.data);
       } else {
-        localStorage.removeItem('adminToken');
-        navigate('/admin/login');
       }
     } catch (error) {
-      console.error('Error fetching admin profile:', error);
-      localStorage.removeItem('adminToken');
-      navigate('/admin/login');
+      console.error("Error fetching admin profile:", error);
+      navigate("/admin/dashboard");
     } finally {
       setIsLoading(false);
     }
@@ -58,19 +58,16 @@ const AdminDashboard = () => {
 
   const handleLogout = async () => {
     try {
-      const token = localStorage.getItem('adminToken');
+      const token = localStorage.getItem("adminToken");
       await fetch(`${import.meta.env.VITE_BACKEND}/admin/auth/logout`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       });
     } catch (error) {
-      console.error('Logout error:', error);
-    } finally {
-      localStorage.removeItem('adminToken');
-      navigate('/admin/login');
+      console.error("Logout error:", error);
     }
   };
 
@@ -88,17 +85,17 @@ const AdminDashboard = () => {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'overview':
+      case "overview":
         return <DashboardOverview />;
-      case 'schedules':
+      case "schedules":
         return <ScheduleManagement />;
-      case 'notifications':
+      case "notifications":
         return <NotificationCenter />;
-      case 'tracking':
+      case "tracking":
         return <LiveTracking />;
-      case 'routes':
+      case "routes":
         return <RouteManagement />;
-      case 'map-tools':
+      case "map-tools":
         return (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
@@ -113,12 +110,15 @@ const AdminDashboard = () => {
                   }`}
                 >
                   <MapPinIcon className="w-4 h-4 mr-2" />
-                  {isSelectingCoordinates ? "Cancel Selection" : "Select Coordinates"}
+                  {isSelectingCoordinates
+                    ? "Cancel Selection"
+                    : "Select Coordinates"}
                 </button>
                 {selectedCoordinates && (
                   <div className="bg-green-50 border border-green-200 rounded-lg px-4 py-2">
                     <p className="text-sm text-green-800">
-                      Selected: {selectedCoordinates.lat.toFixed(6)}, {selectedCoordinates.lng.toFixed(6)}
+                      Selected: {selectedCoordinates.lat.toFixed(6)},{" "}
+                      {selectedCoordinates.lng.toFixed(6)}
                     </p>
                   </div>
                 )}
@@ -128,26 +128,37 @@ const AdminDashboard = () => {
             <div className="bg-white rounded-lg shadow p-6">
               <MapComponent
                 mode={isSelectingCoordinates ? "select" : "view"}
-                markers={selectedCoordinates ? [{
-                  lat: selectedCoordinates.lat,
-                  lng: selectedCoordinates.lng,
-                  type: "selected",
-                  title: "Selected Location",
-                  description: `Lat: ${selectedCoordinates.lat.toFixed(6)}, Lng: ${selectedCoordinates.lng.toFixed(6)}`,
-                  color: "#EF4444",
-                }] : []}
+                markers={
+                  selectedCoordinates
+                    ? [
+                        {
+                          lat: selectedCoordinates.lat,
+                          lng: selectedCoordinates.lng,
+                          type: "selected",
+                          title: "Selected Location",
+                          description: `Lat: ${selectedCoordinates.lat.toFixed(
+                            6
+                          )}, Lng: ${selectedCoordinates.lng.toFixed(6)}`,
+                          color: "#EF4444",
+                        },
+                      ]
+                    : []
+                }
                 height="600px"
                 showControls={true}
                 onLocationSelect={handleLocationSelect}
               />
-              
-                             {isSelectingCoordinates && (
-                 <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                   <p className="text-sm text-blue-700">
-                     Move the map to position the red pin over your desired location, then click "Select These Coordinates" or click directly on the map. The selected location will be marked with a red dot.
-                   </p>
-                 </div>
-               )}
+
+              {isSelectingCoordinates && (
+                <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="text-sm text-blue-700">
+                    Move the map to position the red pin over your desired
+                    location, then click "Select These Coordinates" or click
+                    directly on the map. The selected location will be marked
+                    with a red dot.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         );
@@ -167,10 +178,10 @@ const AdminDashboard = () => {
   return (
     <div className="flex h-screen bg-gray-100">
       <AdminSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-      
+
       <div className="flex-1 flex flex-col overflow-hidden">
         <AdminHeader adminData={adminData} onLogout={handleLogout} />
-        
+
         <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
           {renderContent()}
         </main>
