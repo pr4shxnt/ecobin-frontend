@@ -20,7 +20,7 @@ export const registerLandlord = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data || "registration failed. It's us not you"
+        error?.response?.data || "registration failed. It's us not you"
       );
     }
   }
@@ -39,7 +39,7 @@ export const loginLandlord = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data || error.message);
+      return rejectWithValue(error.response?.data || "error.message");
     }
   }
 );
