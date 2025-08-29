@@ -73,6 +73,18 @@ export const getTenant = createAsyncThunk(
   }
 );
 
+export const getTenantByTenantId = createAsyncThunk(
+  "tenant/get",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(`${API_URL}/tenants/userinput/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "No user found");
+    }
+  }
+);
+
 export // Tenant slice
 const tenantSlice = createSlice({
   name: "tenant",
@@ -80,6 +92,7 @@ const tenantSlice = createSlice({
     tenant: null,
     token: null,
     loading: false,
+    tenantSingle: null,
     error: null,
     isTenantAuthenticated: verifyTenantAuthentication(token),
   },
@@ -117,7 +130,7 @@ const tenantSlice = createSlice({
     });
     builder.addCase(loginTenant.fulfilled, (state, action) => {
       state.loading = false;
-      state.tenant = action.payload.tenant;
+      state.tenant = action.payload.data;
       state.token = action.payload.token;
       localStorage.setItem("tenant_session", action.payload.token);
     });
@@ -135,6 +148,19 @@ const tenantSlice = createSlice({
       state.error = null;
     });
     builder.addCase(getTenant.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(getTenantByTenantId.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getTenantByTenantId.fulfilled, (state, action) => {
+      state.loading = false;
+      state.tenantSingle = action.payload;
+      state.error = null;
+    });
+    builder.addCase(getTenantByTenantId.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

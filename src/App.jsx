@@ -19,6 +19,7 @@ import Profile from "./Pages/Profile";
 import UserLocation from "./Pages/UserLocation";
 import AdminLogin from "./Pages/AdminLogin";
 import AdminDashboard from "./Pages/AdminDashboard";
+import UserInput from "./Components/UserInput";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <AdminDashboard />,
+      },
+      {
+        path: "userinput/:userId",
+        element: <UserInput />,
       },
     ],
   },

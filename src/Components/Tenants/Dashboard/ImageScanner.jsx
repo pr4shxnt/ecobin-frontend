@@ -40,7 +40,7 @@ export default function ImageScanner() {
   const result = useMemo(() => reply || {}, [reply]);
 
   return (
-    <div className="min-h-screen w-full bg-gray-50 flex items-center justify-center p-4">
+    <div className="md:min-h-screen w-full bg-gray-50 flex items-center justify-center p-4">
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Waste Image Scanner
