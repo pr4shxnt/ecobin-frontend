@@ -41,7 +41,7 @@ const Navbar = () => {
   return (
     <div
       className={`navbar  ${
-        navFixed ? " fixed " : "fixed md:relative container"
+        navFixed ? " fixed " : "fixed md:relative"
       } w-full z-50 shadow-lg transition-transform duration-300
         `}
     >

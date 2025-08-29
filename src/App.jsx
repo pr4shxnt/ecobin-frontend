@@ -20,6 +20,11 @@ import UserLocation from "./Pages/UserLocation";
 import AdminLogin from "./Pages/AdminLogin";
 import AdminDashboard from "./Pages/AdminDashboard";
 import UserInput from "./Components/UserInput";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
+import Author from "./Pages/Author";
+import Features from "./Pages/Features";
+import GitForce from "./Pages/GitForce";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +34,26 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Homepage />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
+      },
+      {
+        path: "gallery",
+        element: <Author />,
+      },
+      {
+        path: "admission/inquiry",
+        element: <Features />,
+      },
+      {
+        path: "visit-form",
+        element: <GitForce />,
       },
       {
         path: "test",
